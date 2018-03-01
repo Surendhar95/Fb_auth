@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Go Cool Solutions</string>
+    <string name="facebook_app_id">174272943365875</string>
+    <string name="fb_login_protocol_scheme">fb174272943365875</string>
+</resources>

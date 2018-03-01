@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "478517400660",
+    "firebase_url": "https://go-cool-solutions.firebaseio.com",
+    "project_id": "go-cool-solutions",
+    "storage_bucket": "go-cool-solutions.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478517400660:android:bdda3018bb58ca0a",
+        "android_client_info": {
+          "package_name": "com.awesomeproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478517400660-l2kjjvr0pqh2l9rv0pub3o194ub9gtmg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDENVlRHIFIOuVgUzD43D2fA6Ed1M-M_SA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
