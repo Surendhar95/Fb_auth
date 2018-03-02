@@ -138,18 +138,26 @@ android {
 }
 
 dependencies {
-    // compile(project(':react-native-firebase')) {
-    //     exclude group: "com.google.firebase"
-    // }
+    compile (project(':react-native-fbsdk')) {
+        exclude group: 'com.google.android.gms'
+    }
+    compile(project(':react-native-firebase')) {
+        transitive = false
+    }
+
+    // RNFirebase required dependencies
+    compile ("com.google.android.gms:play-services-base:11.8.0") {
+        force = true;
+    }
+
+    // RNFirebase optional dependencies
+    compile "com.google.firebase:firebase-auth:11.8.0"
+    compile "com.google.firebase:firebase-firestore:11.8.0"
     compile project(':react-native-fbsdk')
     compile 'com.parse.bolts:bolts-android:1.1.4'
     compile "com.facebook.react:react-native:+"  // From node_modules
-    compile ('com.google.firebase:firebase-core:11.8.0') {
-        force = true;    
-    }
-    compile ('com.google.firebase:firebase-auth:11.8.0') {
-        force = true;
-    }
+    compile "com.google.firebase:firebase-core:11.8.0"
+
 
 }
 

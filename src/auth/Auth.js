@@ -17,7 +17,9 @@ class Auth extends Component {
     render(){
         return (
             <View>
-                <Login />
+                <Login 
+                  navigation = {this.props.navigation}
+                />
             </View>
         )
     }

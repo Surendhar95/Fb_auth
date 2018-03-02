@@ -3,32 +3,33 @@ import React, { Component } from 'react';
 import {
     View
 } from 'react-native'
-//import firebase from 'react-native-firebase';
+import firebase from 'react-native-firebase';
 const FBSDK = require('react-native-fbsdk');
 const {
   LoginButton,
   AccessToken,
   LoginManager
 } = FBSDK;
+ const ref = firebase.firestore().collection('users');
 
-
-const Login = () => {
-
+const Login = (props) => {
+   
+    console.log(ref)
     return(
-        <View>
+        <View style={{margin: 80}}>
             <LoginButton
                 publishPermissions={["publish_actions"]}
-                onLoginFinished={
-                    this.onLoginOrRegister
+                onLoginFinished={() =>
+                    onLoginOrRegister(props)
                 }
-                onLogoutFinished={() => alert("logout.")}
+                onLogoutFinished={() => {}}
             />
         </View>
     )
         
 }
 
-onLoginOrRegister = () => {
+onLoginOrRegister = (props) => {
   LoginManager.logInWithReadPermissions(['public_profile', 'email'])
     .then((result) => {
       if (result.isCancelled) {
@@ -38,18 +39,28 @@ onLoginOrRegister = () => {
       return AccessToken.getCurrentAccessToken();
     })
     .then((data) => {
-      // Create a new Firebase credential with the token
       const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
       // Login with the credential
-      return firebase.auth().signInWithCredential(credential);
+      return firebase.auth().signInAndRetrieveDataWithCredential(credential);
     })
     .then((user) => {
-      // If you need to do anything with the user, do it here
-      // The user will be logged in automatically by the
-      // `onAuthStateChanged` listener we set up in App.js earlier
+      
+      let ifPresent = ref.where('user_name', '==', user.user._user.providerData[0].displayName)
+      if(!ifPresent) {
+         ref.add({
+          user_name: user.user._user.providerData[0].displayName,
+          email: user.user._user.providerData[0].email,
+          provider_id: user.user._user.providerData[0].providerId
+        })
+      }
+      props.navigation.navigate('Entry', {name: user.user._user.providerData[0].displayName})
+
+
+        
     })
     .catch((error) => {
       const { code, message } = error;
+      console.log(error)
       // For details of error codes, see the docs
       // The message contains the default Firebase string
       // representation of the error
